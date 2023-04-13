@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa43ac4030f4d4147a7b7c0861d0e3a1, type: 3}
+  m_Name: InventorySettings
+  m_EditorClassIdentifier: 
+  _size: 30
+  _freeCellsAmount: 15
+  _buyingCellsAmount: 15
+  cellViewPrefab: {fileID: 6419749256255396078, guid: 1dab3cf601c43d1419957ed1d23860a4,
+    type: 3}
