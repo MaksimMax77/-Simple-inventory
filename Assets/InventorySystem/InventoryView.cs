@@ -1,4 +1,3 @@
-using Items;
 using UnityEngine;
 
 namespace InventorySystem
@@ -8,16 +7,16 @@ namespace InventorySystem
         private CellView[] _cells;
         [SerializeField] private CellView _cellViewPrefab;
         [SerializeField] private Transform _cellParent;
-
-        public void InitCells(int size)
+        
+        public void OnCellsCreated(int size)
         {
             _cells = new CellView[size];
-        }
-        
-        public void OnCellCreated(int index)
-        {
-            var cell = Instantiate(_cellViewPrefab, _cellParent);
-            _cells[index] = cell;
+
+            for (int i = 0, len = _cells.Length; i < len; ++i)
+            {
+                var cell = Instantiate(_cellViewPrefab, _cellParent);
+                _cells[i] = cell;
+            }
         }
         
         public void OnUpdate(Cell cell, bool itemAdd)

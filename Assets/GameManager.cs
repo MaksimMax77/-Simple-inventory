@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
     private SubscribeManager _subscribeManager;
     public static GameManager Instance { get; private set; }
     public ItemsManager ItemsManager => _itemsManager;
-    public InventoryDataProvider InventoryDataProvider => _inventoryDataProvider;
-
 
     private void Awake()
     {
@@ -29,7 +27,7 @@ public class GameManager : MonoBehaviour
         _subscribeManager = new SubscribeManager();
         _inventoryDataProvider = new InventoryDataProvider();
         _inventoryModel = new InventoryModel(_inventorySettings);
-        _inventoryController = new InventoryController(_inventoryModel, _inventoryView, _inventorySettings);
+        _inventoryController = new InventoryController(_inventoryModel, _inventoryView);
         _gameWindowController = new GameWindowController(_inventoryModel, _gameWindowView, _itemsManager);
         Subscribe();
         _inventoryDataProvider.LoadData();

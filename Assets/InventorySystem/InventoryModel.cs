@@ -9,7 +9,7 @@ namespace InventorySystem
 {
     public class InventoryModel
     {
-        public event Action<int> CellCreated;
+        public event Action<int> CellsCreated;
         public event Action<Cell []> InventoryUpdated;
         public event Action<Cell, bool> CellUpdated;
         
@@ -24,6 +24,8 @@ namespace InventorySystem
             _freeCellsAmount = settings.FreeCellsAmount;
             _buyingCellsAmount = settings.BuyingCellsAmount;
         }
+        
+        #region public functions
         public void OnDataLoad(List<Cell> loadedCells)
         {
             CreateCellsField();
@@ -46,7 +48,6 @@ namespace InventorySystem
                 {
                     CellUpdated?.Invoke(cell, false);
                 }
-                
             }
         }
 
@@ -91,7 +92,9 @@ namespace InventorySystem
             AddAvailableCells(_buyingCellsAmount);
         }
         
-        #region private
+        #endregion
+        
+        #region private functions
 
         private void AddAvailableCells(int amount)
         {
@@ -122,8 +125,8 @@ namespace InventorySystem
                 var cell = new Cell();
                 _cells[i] = cell;
                 cell.index = i;
-                CellCreated?.Invoke(i);
             }
+            CellsCreated?.Invoke(_size);
         }
         
         private void SetInFreeCell(ItemData itemData)
