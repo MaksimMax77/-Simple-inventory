@@ -1,9 +1,7 @@
-using System;
 using Items;
 
 namespace InventorySystem
 {
-    [Serializable]
     public class Cell
     {
         public ItemData itemData;
