@@ -105,6 +105,7 @@ namespace InventorySystem.Inventory
             
             CellUpdated?.Invoke(_cells[dropIndex], _cells[dropIndex].occupied);
             CellUpdated?.Invoke(_cells[index], _cells[index].occupied);
+            InventoryUpdated?.Invoke(_cells);
         }
 
         private void AddAvailableCells(int amount)
