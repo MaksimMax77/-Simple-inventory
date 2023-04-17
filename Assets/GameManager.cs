@@ -3,6 +3,7 @@ using EventSubscriber;
 using GameWindow;
 using UnityEngine;
 using InventorySystem;
+using InventorySystem.Inventory;
 using InventorySystem.InventorySettings;
 using Items;
 

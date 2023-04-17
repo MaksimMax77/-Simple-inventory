@@ -1,6 +1,6 @@
 using EventSubscriber;
 
-namespace InventorySystem
+namespace InventorySystem.Inventory
 {
     public class InventoryController: ISubscriber
     {
@@ -17,12 +17,14 @@ namespace InventorySystem
         {
             _inventoryModel.CellUpdated += _inventoryView.OnUpdate;
             _inventoryModel.CellsCreated += _inventoryView.OnCellsCreated;
+            _inventoryView.NeedSwapCells += _inventoryModel.SwapCells;
         }
         
         public void UnSubscribe()
         {
             _inventoryModel.CellUpdated -= _inventoryView.OnUpdate;
             _inventoryModel.CellsCreated -= _inventoryView.OnCellsCreated;
+            _inventoryView.NeedSwapCells -= _inventoryModel.SwapCells;
         }
     }
 }

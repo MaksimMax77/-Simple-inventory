@@ -1,5 +1,6 @@
 using EventSubscriber;
 using InventorySystem;
+using InventorySystem.Inventory;
 using Items;
 using Items.Containers;
 using Random = System.Random;

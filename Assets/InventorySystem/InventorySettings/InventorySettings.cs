@@ -1,3 +1,4 @@
+using InventorySystem.Cell;
 using UnityEngine;
 
 namespace InventorySystem.InventorySettings

@@ -5,15 +5,15 @@ using Items.Containers;
 using UnityEngine;
 using Random = System.Random;
 
-namespace InventorySystem
+namespace InventorySystem.Inventory
 {
     public class InventoryModel
     {
         public event Action<int> CellsCreated;
-        public event Action<Cell []> InventoryUpdated;
-        public event Action<Cell, bool> CellUpdated;
+        public event Action<Cell.Cell []> InventoryUpdated;
+        public event Action<Cell.Cell, bool> CellUpdated;
         
-        private Cell[] _cells;
+        private Cell.Cell[] _cells;
         private int _size;
         private int _freeCellsAmount;
         private int _buyingCellsAmount;
@@ -26,7 +26,7 @@ namespace InventorySystem
         }
         
         #region public functions
-        public void OnDataLoad(List<Cell> loadedCells)
+        public void OnDataLoad(List<Cell.Cell> loadedCells)
         {
             CreateCellsField();
             
@@ -91,10 +91,21 @@ namespace InventorySystem
         {
             AddAvailableCells(_buyingCellsAmount);
         }
-        
-        #endregion
-        
-        #region private functions
+
+        public void SwapCells(int dropIndex, int index)
+        { 
+            if (!_cells[index].available || !_cells[dropIndex].occupied)
+            {
+                return;
+            }
+
+            (_cells[dropIndex], _cells[index]) = (_cells[index], _cells[dropIndex]);
+            _cells[dropIndex].index = dropIndex;
+            _cells[index].index = index;
+            
+            CellUpdated?.Invoke(_cells[dropIndex], _cells[dropIndex].occupied);
+            CellUpdated?.Invoke(_cells[index], _cells[index].occupied);
+        }
 
         private void AddAvailableCells(int amount)
         {
@@ -118,11 +129,11 @@ namespace InventorySystem
         
         private void CreateCellsField()
         {
-            _cells = new Cell[_size];
+            _cells = new Cell.Cell[_size];
 
             for (int i = 0, len = _cells.Length ; i < len; ++i)
             {
-                var cell = new Cell();
+                var cell = new Cell.Cell();
                 _cells[i] = cell;
                 cell.index = i;
             }
@@ -144,9 +155,9 @@ namespace InventorySystem
             }
         }
 
-        private List<Cell> GetOccupiedCells()
+        private List<Cell.Cell> GetOccupiedCells()
         {
-            var cells = new List<Cell>();
+            var cells = new List<Cell.Cell>();
 
             for (int i = 0, len = _cells.Length; i < len; ++i)
             {
@@ -159,9 +170,9 @@ namespace InventorySystem
             return cells;
         }
 
-        private List<Cell> GetCellsByItemType(ItemType itemType)
+        private List<Cell.Cell> GetCellsByItemType(ItemType itemType)
         {
-            var cells = new List<Cell>();
+            var cells = new List<Cell.Cell>();
             var occupiedCells = GetOccupiedCells();
             
             for (int i = 0, len = occupiedCells.Count; i < len; ++i)
